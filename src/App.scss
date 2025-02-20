@@ -1,0 +1,180 @@
+.App {
+  text-align: center;
+  position: relative;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.createForm,
+.list {
+  display: flex;
+  justify-items: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 35px;
+  border-radius: 5px;
+  border: 3px solid cyan;
+  margin-top: 100px;
+
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: left;
+
+  }
+
+  .createLine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+
+    span {
+      width: 300px;
+      text-align: right;
+    }
+
+    .busy {
+      width: 400px;
+      text-align: left;
+      font-size: 24px;
+    }
+
+    input {
+      width: 400px;
+      border: none;
+      border-radius: 3px;
+      padding: 3px 5px;
+      font-size: 24px;
+      background-color: #bebebe6f;
+      color: white;
+    }
+
+
+  }
+
+  button {
+    margin-top: 15px;
+  }
+}
+
+.ListItemsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
+  justify-content: center;
+  gap: 25px;
+
+  .listItem {
+    background-color: rgba(0, 139, 139, 0.45);
+    border: 3px solid darkcyan;
+    border-radius: 5px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    font-size: 18px;
+    line-height: 30px;
+    position: relative;
+
+    span {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .list-id {
+      font-size: 45px;
+      position: absolute;
+      top: -15px;
+      left: -15px;
+
+
+    }
+
+    .list-btns {
+      display: flex;
+      justify-content: end;
+      width: 100%;
+      column-gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      padding: 10px;
+      font-size: 16px;
+    }
+  }
+
+}
+
+.modal {
+  height: 100%;
+  width: 100%;
+  background-color: #282c3485;
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-items: center;
+  flex-direction: column;
+  align-items: center;
+
+
+  .edit-container {
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 35px;
+    border-radius: 5px;
+    border: 3px solid cyan;
+    color: white;
+    background-color: #282c34;
+    margin-top: 100px;
+
+  }
+
+}
