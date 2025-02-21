@@ -34,7 +34,7 @@ export default function List({ scooters, setScooters, scooterEditSet }) {
 
             <div className="ListItemsContainer">
                 {scooters.map((s) =>
-                    <div key={s.id} className="listItem">
+                    <div key={s.registrationCode} className="listItem">
                         <span className="list-id">{s.id}</span>
 
                         <div>Reg. nr.: <span>{s.registrationCode}</span></div>

@@ -21,10 +21,6 @@ export default function Edit({ scooterEdit, scooterEditSet, setScooters, scooter
     const [newData, newDataSet] = useState({ date: new Date().toISOString().split('T')[0], distance: 0 })
 
 
-    if (scooterEdit !== null) {
-        console.log(scooterEdit.isBusy);
-    }
-
 
     const checkChange = _ => {
         scooterEditSet(s => s.isBusy === 0 ? { ...s, isBusy: 1 } : { ...s, isBusy: 0 })
@@ -38,11 +34,14 @@ export default function Edit({ scooterEdit, scooterEditSet, setScooters, scooter
     }
 
     const saveEditScooter = _ => {
-        scooterEditSet({ ...scooterEdit, lastUseTime: newData.date, totalRideKilometres: parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance) })
-        setScooters(s => {
-            setScooters(scooters.filter(sct => sct.registrationCode !== scooterEdit.registrationCode));
-            setScooters(s => [...s, scooterEdit])
-        })
+        console.log(scooterEdit);
+        setScooters(s => [...s.filter(sct => sct.registrationCode !== scooterEdit.registrationCode), {
+            ...scooterEdit,
+            lastUseTime: newData.date,
+            totalRideKilometres: (parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance))
+        }
+        ]);
+        scooterEditSet(null);
     }
 
 

@@ -10,22 +10,24 @@ import randomStr from "../Functions/randomStr";
 import { useState, useEffect } from "react";
 
 
-export default function Create({ setScooters, scooters }) {
+export default function Create({ setScooters, scooters, idn }) {
 
 
-    const [newScooter, setNewScooter] = useState({ id: scooters.length + 1, registrationCode: randomStr(8), isBusy: 0, lastUseTime: new Date().toISOString().split('T')[0], totalRideKilometres: 0 })
+    const [newScooter, setNewScooter] = useState({ id: idn.current + 1, registrationCode: randomStr(8), isBusy: 0, lastUseTime: new Date().toISOString().split('T')[0], totalRideKilometres: 0 })
     const handleInput = e => {
         setNewScooter({ ...newScooter, [e.target.name]: e.target.value })
     }
 
     const saveNewScooter = _ => {
+        idn.current++;
         console.log(newScooter);
         setScooters(s => [...s, newScooter])
 
     }
 
     useEffect(_ => {
-        setNewScooter({ ...newScooter, id: scooters.length + 1, registrationCode: randomStr(8), isBusy: 0, lastUseTime: new Date().toISOString().split('T')[0], totalRideKilometres: 0 })
+        setNewScooter({ ...newScooter, id: idn.current + 1, registrationCode: randomStr(8), isBusy: 0, lastUseTime: new Date().toISOString().split('T')[0], totalRideKilometres: 0 });
+
     }, [scooters])
     return (
         <div className="createForm">
