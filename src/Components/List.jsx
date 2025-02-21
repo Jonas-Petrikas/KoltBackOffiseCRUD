@@ -10,6 +10,8 @@
 
 export default function List({ scooters, setScooters, scooterEditSet }) {
 
+    // const [sort, dispatch] = useReducer(reducer, initialArg, init)
+
     const deleteScooter = (e, regCode) => {
         console.log(e.target, regCode)
         setScooters(s => s.filter(sct => sct.registrationCode !== regCode))
@@ -25,12 +27,32 @@ export default function List({ scooters, setScooters, scooterEditSet }) {
 
 
     }
+    const doSort = e => {
+        if (e.target.name === 'km') {
+            console.log(scooters);
+            setScooters(s => s.toSorted((a, b) => a.totalRideKilometres - b.totalRideKilometres))
+            console.log('distavnce')
+            console.log(scooters);
+        } else if (e.target.name === 'date') {
+            setScooters(s => s.toSorted((a, b) => Date.parse(a.lastUseTime) - Date.parse(b.lastUseTime)));
+            console.log('data', Date.parse(scooters[1].lastUseTime));
+            console.log(scooters);
+
+        } else {
+            console.log('laba diena')
+        }
+    }
+
 
 
 
     return (
         <div className="list">
             <div><h2>Esantys paspirtukai:</h2></div>
+            <div className="sort-btns">
+                <button className="btn" onClick={doSort} name="km">Pagal kilometrus</button>
+                <button className="btn" onClick={doSort} name="date">Pagal naudojimo datą</button>
+            </div>
 
             <div className="ListItemsContainer">
                 {scooters.map((s) =>

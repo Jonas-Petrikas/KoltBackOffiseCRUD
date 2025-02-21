@@ -21,7 +21,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 20px;
   color: white;
 }
 
@@ -37,6 +37,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1 {
+  margin-bottom: 0px;
 }
 
 
@@ -96,6 +100,44 @@
     margin-top: 15px;
   }
 }
+
+.createForm {
+  margin-top: 70px;
+}
+
+.stats {
+  display: flex;
+  justify-items: center;
+  flex-direction: column;
+  align-items: center;
+  // gap: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  // border: 3px solid cyan;
+  margin-top: 0px;
+
+
+  p {
+    margin: 5px;
+    padding: 5px;
+
+
+
+    .stat {
+      color: cyan;
+      font-weight: 700;
+      font-size: 24px;
+
+    }
+  }
+
+  hr {
+    margin: 7px;
+    width: 105%;
+  }
+
+}
+
 
 .ListItemsContainer {
   display: flex;
@@ -169,11 +211,16 @@
     align-items: center;
     gap: 20px;
     padding: 35px;
+    font-size: 20px;
     border-radius: 5px;
     border: 3px solid cyan;
     color: white;
     background-color: #282c34;
     margin-top: 100px;
+
+    input {
+      font-size: 20px;
+    }
 
   }
 

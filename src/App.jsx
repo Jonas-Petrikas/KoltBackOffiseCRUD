@@ -4,8 +4,8 @@ import './buttons.scss';
 import { useEffect, useRef, useState } from 'react';
 import Create from './Components/Create';
 import List from './Components/List';
-import randomStr from './Functions/randomStr';
 import Edit from './Components/Edit';
+import Stats from './Components/Stats';
 
 
 
@@ -24,6 +24,7 @@ function App() {
     localStorage.setItem('scooters', JSON.stringify(scooters));
     localStorage.setItem('id', JSON.stringify(idn.current));
     console.log('išsaugota')
+
   }, [scooters])
 
 
@@ -31,8 +32,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <h1><span style={{ color: 'cyan' }}>'Kolt'</span> pasipirtukų nuoma!</h1>
+          <h1><span style={{ color: 'cyan' }}>'Kolt'</span> paspirtukų nuoma!</h1>
+          <Stats scooters={scooters} />
           <Create setScooters={setScooters} scooters={scooters} idn={idn} />
+
           <List scooters={scooters} setScooters={setScooters} scooterEditSet={scooterEditSet} />
         </div>
       </header>

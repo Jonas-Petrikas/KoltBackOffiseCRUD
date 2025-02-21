@@ -38,9 +38,10 @@ export default function Edit({ scooterEdit, scooterEditSet, setScooters, scooter
         setScooters(s => [...s.filter(sct => sct.registrationCode !== scooterEdit.registrationCode), {
             ...scooterEdit,
             lastUseTime: newData.date,
-            totalRideKilometres: (parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance))
+            totalRideKilometres: (parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance)).toFixed(2)
         }
         ]);
+        newDataSet({ ...newData, date: new Date().toISOString().split('T')[0], distance: 0 });
         scooterEditSet(null);
     }
 
@@ -67,7 +68,7 @@ export default function Edit({ scooterEdit, scooterEditSet, setScooters, scooter
                         <div>
                             <input type="date" onChange={e => newDataSet({ ...newData, date: e.target.value })} value={newData.date}></input>
                         </div></div>
-                    <div className='createLine'><span>Bendrai nuvažiuota kilometrų: {scooterEdit === null ? '' : parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance) || 0}</span>
+                    <div className='createLine'><span>Bendrai nuvažiuota kilometrų: {scooterEdit === null ? '' : (parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance)).toFixed(2)}</span>
                         <div>
                             Paskutinio važiavimo km.: <input type="number" onChange={e => newDataSet({ ...newData, distance: e.target.value })} value={newData.distance} />
                         </div></div>
