@@ -10,19 +10,40 @@ import randomStr from "../Functions/randomStr";
 import { useState } from "react";
 
 
-export default function Create({ setScooters, scooters, idn }) {
+export default function Create({ setScooters, idn, scooters, setMessage }) {
+
 
 
     const [newScooter, setNewScooter] = useState({ id: idn.current + 1, registrationCode: randomStr(8), isBusy: 0, lastUseTime: new Date().toISOString().split('T')[0], totalRideKilometres: 0 })
     const handleInput = e => {
         setNewScooter({ ...newScooter, [e.target.name]: e.target.value })
+
     }
 
     const saveNewScooter = _ => {
-        idn.current++;
-        console.log(newScooter);
-        setScooters(s => [...s, { ...newScooter, totalRideKilometres: parseFloat(newScooter.totalRideKilometres).toFixed(2) }])
-        setNewScooter({ ...newScooter, id: idn.current + 1, registrationCode: randomStr(8), isBusy: 0, lastUseTime: new Date().toISOString().split('T')[0], totalRideKilometres: 0 });
+        const timeToToday = new Date().getTime() - new Date(newScooter.lastUseTime).getTime();
+        if (newScooter.totalRideKilometres > 0 && timeToToday >= 0 && timeToToday <= 2592000000) {
+            idn.current++;
+            console.log(newScooter);
+            setScooters(s => [...s, { ...newScooter, totalRideKilometres: parseFloat(newScooter.totalRideKilometres).toFixed(2) }])
+            setNewScooter({ ...newScooter, id: idn.current + 1, registrationCode: randomStr(8), isBusy: 0, lastUseTime: new Date().toISOString().split('T')[0], totalRideKilometres: 0 });
+        } else if (newScooter.totalRideKilometres <= 0) {
+            setMessage('Atstumas turi būti didesnis nei 0 km')
+            setTimeout(_ => {
+                setMessage('')
+            }, 3000)
+        } else if (timeToToday < 0) {
+            setMessage('Data negali būti ateityje')
+            setTimeout(_ => {
+                setMessage('')
+            }, 3000)
+        } else if (timeToToday > 2592000000) {
+            setMessage('Paskutinis naudojimas negali būti senesnis nei 30 d.')
+            setTimeout(_ => {
+                setMessage('')
+            }, 3000)
+        }
+
 
     }
 

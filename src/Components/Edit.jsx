@@ -16,7 +16,7 @@
 
 import { useState } from "react";
 
-export default function Edit({ scooterEdit, scooterEditSet, setScooters, scooters }) {
+export default function Edit({ scooterEdit, scooterEditSet, setScooters, scooters, setMessage }) {
 
     const [newData, newDataSet] = useState({ date: new Date().toISOString().split('T')[0], distance: 0 })
 
@@ -34,15 +34,40 @@ export default function Edit({ scooterEdit, scooterEditSet, setScooters, scooter
     }
 
     const saveEditScooter = _ => {
-        console.log(scooterEdit);
-        setScooters(s => [...s.filter(sct => sct.registrationCode !== scooterEdit.registrationCode), {
-            ...scooterEdit,
-            lastUseTime: newData.date,
-            totalRideKilometres: (parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance)).toFixed(2)
+        const timeToLastUse = new Date(newData.date).getTime() - new Date(scooterEdit.lastUseTime).getTime()
+        const timeToToday = new Date().getTime() - new Date(newData.date).getTime();;
+        if (newData.distance > 0 && timeToLastUse >= 0 && timeToToday >= 0 && timeToToday <= 2592000000) {
+
+            console.log(scooterEdit);
+            setScooters(s => [...s.filter(sct => sct.registrationCode !== scooterEdit.registrationCode), {
+                ...scooterEdit,
+                lastUseTime: newData.date,
+                totalRideKilometres: (parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance)).toFixed(2)
+            }
+            ]);
+            newDataSet({ ...newData, date: new Date().toISOString().split('T')[0], distance: 0 });
+            scooterEditSet(null);
+        } else if (newData.distance <= 0) {
+            setMessage('Atstumas turi būti didesnis nei 0 km')
+            setTimeout(_ => {
+                setMessage('')
+            }, 3000)
+        } else if (timeToToday < 0) {
+            setMessage('Data negali būti ateityje')
+            setTimeout(_ => {
+                setMessage('')
+            }, 3000)
+        } else if (timeToToday > 2592000000) {
+            setMessage('Paskutinis naudojimas negali būti senesnis nei 30 d.')
+            setTimeout(_ => {
+                setMessage('')
+            }, 3000)
+        } else if (timeToLastUse < 0) {
+            setMessage('Naudojimo data negali būti senesnė nei buvusi prieš tai')
+            setTimeout(_ => {
+                setMessage('')
+            }, 3000)
         }
-        ]);
-        newDataSet({ ...newData, date: new Date().toISOString().split('T')[0], distance: 0 });
-        scooterEditSet(null);
     }
 
 
@@ -68,7 +93,7 @@ export default function Edit({ scooterEdit, scooterEditSet, setScooters, scooter
                         <div>
                             <input type="date" onChange={e => newDataSet({ ...newData, date: e.target.value })} value={newData.date}></input>
                         </div></div>
-                    <div className='createLine'><span>Bendrai nuvažiuota kilometrų: {scooterEdit === null ? '' : (parseFloat(scooterEdit.totalRideKilometres) + parseFloat(newData.distance)).toFixed(2)}</span>
+                    <div className='createLine'><span>Bendrai nuvažiuota kilometrų: {scooterEdit === null ? '' : (parseFloat(scooterEdit.totalRideKilometres) + (parseFloat(newData.distance) || 0)).toFixed(2)} </span>
                         <div>
                             Paskutinio važiavimo km.: <input type="number" onChange={e => newDataSet({ ...newData, distance: e.target.value })} value={newData.distance} />
                         </div></div>

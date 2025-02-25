@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
 .App {
   text-align: center;
   position: relative;
@@ -21,7 +28,8 @@
   background-color: #282c34;
   min-height: 100vh;
   height: 100%;
-  min-width: 100vh;
+  // min-width: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,6 +125,8 @@ h1 {
 
 .stats {
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   justify-items: center;
   flex-direction: column;
   align-items: center;
@@ -143,7 +153,7 @@ h1 {
 
   hr {
     margin: 7px;
-    width: 105%;
+    width: 100%;
   }
 
 }
@@ -213,11 +223,13 @@ h1 {
   justify-items: center;
   flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
 
 
   .edit-container {
     display: flex;
     justify-items: center;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     gap: 20px;
@@ -240,16 +252,43 @@ h1 {
 @media only screen and (max-width: 700px) {
   .App-header {
     font-size: 14px;
-    overflow: hidden;
+    // overflow: hidden;
+
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .stats {
+    p {
+      font-size: 12px;
+
+      span {
+        display: inline-block;
+      }
+
+      .stat-gap {
+        display: none;
+      }
+
+      .stat {
+        font-size: 14px;
+
+      }
+    }
+
 
   }
 
   .list-btns {
+    flex-wrap: wrap;
+
     button {
       margin-top: 15px;
       height: 30px;
       max-width: 200px;
-      font-size: 12px;
+      font-size: 10px;
     }
 
   }
@@ -257,8 +296,8 @@ h1 {
   button.btn {
     margin-top: 15px;
     height: 30px;
-    max-width: 220px;
-    font-size: 12px;
+    max-width: 200px;
+    font-size: 10px;
     display: flex;
     align-items: center;
   }
@@ -271,9 +310,10 @@ h1 {
   .createForm,
   .list {
 
-    gap: 10px;
+    gap: 0px;
     padding: 15px;
     margin-top: 50px;
+    max-width: 3000px;
 
 
     h2 {
@@ -299,16 +339,16 @@ h1 {
 
       input {
         width: 100px;
-        border: none;
-        border-radius: 3px;
         padding: 3px 5px;
         font-size: 16px;
-        background-color: #bebebe6f;
-        color: white;
+
       }
 
 
+
     }
+
+
 
 
   }
@@ -324,11 +364,63 @@ h1 {
       font-size: 14px;
 
     }
+
+    hr {
+      margin: 7px;
+      width: 90%;
+    }
   }
 
-  hr {
-    margin: 7px;
-    width: 90%;
+
+
+  .ListItemsContainer {
+    max-width: 290px;
+    gap: 10px;
+
+
+    .listItem {
+      padding: 10px;
+      font-size: 14px;
+      line-height: 20px;
+
+
+      span {
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .list-id {
+        font-size: 30px;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+      }
+    }
   }
 
+  div.sort-btns {
+    max-width: 300px;
+    justify-content: center;
+    gap: 3px;
+    font-size: 10px;
+    margin-top: 0px;
+  }
+
+}
+
+.message-container {
+  position: fixed;
+  top: 20px;
+  left: 30px;
+  display: block;
+  background-color: darkcyan;
+  border: 3px solid cyan;
+  color: whitesmoke;
+
+  .message {
+    padding: 20px;
+    font-size: 24px;
+    min-width: 200px;
+
+  }
 }
